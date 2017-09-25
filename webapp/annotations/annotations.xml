@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/UI.xml">
+		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/opu/odata/sap/ZYWA_C_VI_ORDER_INFO_CDS/$metadata">
+		<edmx:Include Alias="ZYWA_C_VI_ORDER_INFO_CDS" Namespace="ZYWA_C_VI_ORDER_INFO_CDS"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/cs02/vocabularies/Org.OData.Aggregation.V1.xml">
+		<edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Capabilities.V1.xml">
+		<edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">
+		<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470971/Communication.xml?api=v2">
+		<edmx:Include Alias="vCard" Namespace="com.sap.vocabularies.Communication.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Core.V1.xml">
+		<edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Measures.V1.xml">
+		<edmx:Include Alias="CQP" Namespace="Org.OData.Measures.V1"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="zywa.testzywa_order_info_app_local_300.ZYWA_C_VI_ORDER_INFO_CDS">
+			<!--===============================================================================
+                Entity Type from chosen collection 
+                ================================================================================-->
+			<Annotations Target="ZYWA_C_VI_ORDER_INFO_CDS.zywa_c_vi_order_infoType">
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.CollectionFacet">
+							<PropertyValue Property="Label" String="{@i18n&gt;@GeneralInfoFacetLabel}"/>
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="UI.ReferenceFacet">
+										<PropertyValue Property="Label" String="{@i18n&gt;@GeneralInfoFacetLabel}"/>
+										<PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
+									</Record>
+								</Collection>
+							</PropertyValue>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Label" String="{@i18n&gt;@SecondFacetLabel}"/>
+							<PropertyValue Property="Target" AnnotationPath="to_order_tree/@UI.LineItem"/>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="to_od_cluster_element/@UI.LineItem"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;LOSINFO_ZUM_EINZELTEIL}"/>
+							<PropertyValue Property="ID" String="RFacetClElement"/>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="to_od_cluster/@UI.LineItem"/>
+							<PropertyValue Property="ID" String="RFacetClDetail"/>
+							<PropertyValue Property="Label" String="Losinhalt"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<!--===============================================================================
+                Entity Type from chosen navigation property
+                ================================================================================-->
+			<Annotations Target="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_C_VI_OD_TREEType">
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="to_od_info/@UI.LineItem"/>
+							<PropertyValue Property="Label" String="Auftragsinformation"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_C_VI_CLUSTER_DETAILType">
+				<Annotation Term="UI.HeaderFacets">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="@UI.HeaderInfo"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_C_CLUST_INFO_FOR_PARTType">
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="to_od_info/@UI.LineItem"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;EXTERNE_AUFTRAGSIDENT}"/>
+							<PropertyValue Property="ID" String="RFacetExtOrders"/>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="to_od_info_1/@UI.LineItem"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;EXTERNE_AUFTRAGSIDENT_(ZYWA)}"/>
+							<PropertyValue Property="ID" String="RFacetExtOrders1"/>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#FGClustInfo"/>
+							<PropertyValue Property="ID" String="RFClustBasicInfo"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;LOSINFO}"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.FieldGroup" Qualifier="FGClustInfo">
+					<Record Type="UI.FieldGroupType">
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataFieldWithNavigationPath">
+									<PropertyValue Property="Target" NavigationPropertyPath="to_od_info"/>
+									<PropertyValue Property="Value" Path="cluster_order_id"/>
+									<PropertyValue Property="Label" String="{@i18n&gt;LOS_ORDER_ID}"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.HeaderFacets">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#FGClustInfo"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;LOSINFO}"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

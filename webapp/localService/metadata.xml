@@ -1,0 +1,232 @@
+<edmx:Edmx Version="1.0"
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value"
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZYWA_C_VI_ORDER_INFO_CDS" xml:lang="en" sap:schema-version="1"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="ZYWA_C_VI_CLUSTER_DETAILType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="cluster_order_id"/>
+                    <PropertyRef Name="element_order_id"/>
+                </Key>
+                <Property Name="cluster_order_id" Type="Edm.String" Nullable="false" MaxLength="16" sap:display-format="NonNegative"/>
+                <Property Name="element_order_id" Type="Edm.String" Nullable="false" MaxLength="16" sap:display-format="NonNegative"/>
+                <Property Name="sequence_no" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative"/>
+                <Property Name="element_prod_id" Type="Edm.String" MaxLength="16" sap:display-format="NonNegative"/>
+                <Property Name="current_cluster_prod_id" Type="Edm.String" MaxLength="16" sap:display-format="NonNegative"/>
+                <Property Name="current_cluster_order_id" Type="Edm.String" MaxLength="16" sap:display-format="NonNegative"/>
+                <Property Name="status" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase"/>
+            </EntityType>
+            <EntityType Name="ZYWA_C_VI_ORDER_ATTRType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="order_id"/>
+                    <PropertyRef Name="attr_name"/>
+                </Key>
+                <Property Name="order_id" Type="Edm.String" Nullable="false" MaxLength="16" sap:display-format="NonNegative"/>
+                <Property Name="attr_name" Type="Edm.String" Nullable="false" MaxLength="30" sap:display-format="UpperCase"/>
+                <Property Name="ident_desc" Type="Edm.String" MaxLength="35"/>
+                <Property Name="attr_value" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase"/>
+                <Property Name="value_desc" Type="Edm.String" MaxLength="35"/>
+            </EntityType>
+            <EntityType Name="ZYWA_I_VI_EI01_ValueHelpType" sap:label="Eingabe Hilfe zu ext. Identtypen" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ext_id_type"/>
+                </Key>
+                <Property Name="ext_id_type" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:text="ext_id_type_Text"/>
+                <Property Name="ext_id_type_Text" Type="Edm.String" MaxLength="30" sap:creatable="false" sap:updatable="false"/>
+            </EntityType>
+            <EntityType Name="ZYWA_I_VI_TY01_ValueHelpType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="prod_type"/>
+                </Key>
+                <Property Name="prod_type" Type="Edm.String" Nullable="false" MaxLength="30" sap:display-format="UpperCase" sap:text="prod_type_Text"/>
+                <Property Name="prod_type_Text" Type="Edm.String" MaxLength="35" sap:creatable="false" sap:updatable="false"/>
+            </EntityType>
+            <EntityType Name="ZYWA_C_VI_ORDER_SCRAP_COUNTType" sap:label="Höhste Versch.zähler zum Auftrag" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="order_id"/>
+                </Key>
+                <Property Name="order_id" Type="Edm.String" Nullable="false" MaxLength="16" sap:display-format="NonNegative"/>
+                <Property Name="scrapped_counter" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative"/>
+            </EntityType>
+            <EntityType Name="ZYWA_C_VI_OD_TREEType" sap:label="Test - Auftragsbaum" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="order_id"/>
+                </Key>
+                <Property Name="path" Type="Edm.String" MaxLength="101" sap:display-format="UpperCase"/>
+                <Property Name="prod_type" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase"/>
+                <Property Name="order_ext_type" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase"/>
+                <Property Name="order_ext_value" Type="Edm.String" MaxLength="48" sap:display-format="UpperCase"/>
+                <Property Name="order_id" Type="Edm.String" Nullable="false" MaxLength="16" sap:display-format="NonNegative"/>
+                <Property Name="order_id_master" Type="Edm.String" MaxLength="16" sap:display-format="NonNegative"/>
+                <NavigationProperty Name="to_od_ext_default" Relationship="ZYWA_C_VI_ORDER_INFO_CDS.assoc_3E806E8B011AF8E5791C26F7D505950D" FromRole="FromRole_assoc_3E806E8B011AF8E5791C26F7D505950D" ToRole="ToRole_assoc_3E806E8B011AF8E5791C26F7D505950D"/>
+                <NavigationProperty Name="to_od_info" Relationship="ZYWA_C_VI_ORDER_INFO_CDS.assoc_224365F6E992943AA5D05EB20AE037A5" FromRole="FromRole_assoc_224365F6E992943AA5D05EB20AE037A5" ToRole="ToRole_assoc_224365F6E992943AA5D05EB20AE037A5"/>
+            </EntityType>
+            <EntityType Name="ZYWA_I_VI_OD_DEFAULT_EXTType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="order_ext_type"/>
+                    <PropertyRef Name="order_ext_value"/>
+                </Key>
+                <Property Name="order_ext_type" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase"/>
+                <Property Name="order_ext_value" Type="Edm.String" Nullable="false" MaxLength="48" sap:display-format="UpperCase"/>
+                <Property Name="check_digit" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase"/>
+                <Property Name="order_id" Type="Edm.String" MaxLength="16" sap:display-format="NonNegative"/>
+                <Property Name="prod_type" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase"/>
+            </EntityType>
+            <EntityType Name="zywa_c_vi_order_infoType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="order_ext_type"/>
+                    <PropertyRef Name="order_ext_value"/>
+                </Key>
+                <Property Name="order_ext_type" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:text="to_id_type_value_help/ext_id_type_Text" sap:value-list="standard"/>
+                <Property Name="order_ext_value" Type="Edm.String" Nullable="false" MaxLength="48" sap:display-format="UpperCase"/>
+                <Property Name="order_id" Type="Edm.String" MaxLength="16" sap:display-format="NonNegative"/>
+                <Property Name="prod_id" Type="Edm.String" MaxLength="16" sap:display-format="NonNegative"/>
+                <Property Name="prod_type" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:text="to_prod_type_value_help/prod_type_Text" sap:value-list="standard"/>
+                <Property Name="prod_cat" Type="Edm.String" MaxLength="7" sap:display-format="UpperCase"/>
+                <Property Name="scrapped_counter" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative"/>
+                <Property Name="order_id_master" Type="Edm.String" MaxLength="16" sap:display-format="NonNegative"/>
+                <NavigationProperty Name="to_id_type_value_help" Relationship="ZYWA_C_VI_ORDER_INFO_CDS.assoc_7EE34D7FD2CC288932E9C2999ED4D6C7" FromRole="FromRole_assoc_7EE34D7FD2CC288932E9C2999ED4D6C7" ToRole="ToRole_assoc_7EE34D7FD2CC288932E9C2999ED4D6C7"/>
+                <NavigationProperty Name="to_od_cluster" Relationship="ZYWA_C_VI_ORDER_INFO_CDS.assoc_9A134066FA1EF0CF8865F60C43BDDBC6" FromRole="FromRole_assoc_9A134066FA1EF0CF8865F60C43BDDBC6" ToRole="ToRole_assoc_9A134066FA1EF0CF8865F60C43BDDBC6"/>
+                <NavigationProperty Name="to_od_cluster_element" Relationship="ZYWA_C_VI_ORDER_INFO_CDS.assoc_C36A7AFEDCA92A39590E50395A27B8FC" FromRole="FromRole_assoc_C36A7AFEDCA92A39590E50395A27B8FC" ToRole="ToRole_assoc_C36A7AFEDCA92A39590E50395A27B8FC"/>
+                <NavigationProperty Name="to_order_attribute" Relationship="ZYWA_C_VI_ORDER_INFO_CDS.assoc_713B3329DBBD3D73969CA05DA96715F6" FromRole="FromRole_assoc_713B3329DBBD3D73969CA05DA96715F6" ToRole="ToRole_assoc_713B3329DBBD3D73969CA05DA96715F6"/>
+                <NavigationProperty Name="to_order_tree" Relationship="ZYWA_C_VI_ORDER_INFO_CDS.assoc_4410FEF64DB9F3A0AAFC66FFAFE85FD7" FromRole="FromRole_assoc_4410FEF64DB9F3A0AAFC66FFAFE85FD7" ToRole="ToRole_assoc_4410FEF64DB9F3A0AAFC66FFAFE85FD7"/>
+                <NavigationProperty Name="to_prod_type_value_help" Relationship="ZYWA_C_VI_ORDER_INFO_CDS.assoc_B272588D699EA4819169301DF05741EB" FromRole="FromRole_assoc_B272588D699EA4819169301DF05741EB" ToRole="ToRole_assoc_B272588D699EA4819169301DF05741EB"/>
+                <NavigationProperty Name="to_scrap_counter" Relationship="ZYWA_C_VI_ORDER_INFO_CDS.assoc_B1C157C7726F7A16E0C43F4D9E332792" FromRole="FromRole_assoc_B1C157C7726F7A16E0C43F4D9E332792" ToRole="ToRole_assoc_B1C157C7726F7A16E0C43F4D9E332792"/>
+            </EntityType>
+            <Association Name="assoc_7EE34D7FD2CC288932E9C2999ED4D6C7" sap:content-version="1">
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.zywa_c_vi_order_infoType" Multiplicity="1" Role="FromRole_assoc_7EE34D7FD2CC288932E9C2999ED4D6C7"/>
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_I_VI_EI01_ValueHelpType" Multiplicity="0..1" Role="ToRole_assoc_7EE34D7FD2CC288932E9C2999ED4D6C7"/>
+            </Association>
+            <Association Name="assoc_9A134066FA1EF0CF8865F60C43BDDBC6" sap:content-version="1">
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.zywa_c_vi_order_infoType" Multiplicity="1" Role="FromRole_assoc_9A134066FA1EF0CF8865F60C43BDDBC6"/>
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_C_VI_CLUSTER_DETAILType" Multiplicity="*" Role="ToRole_assoc_9A134066FA1EF0CF8865F60C43BDDBC6"/>
+            </Association>
+            <Association Name="assoc_C36A7AFEDCA92A39590E50395A27B8FC" sap:content-version="1">
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.zywa_c_vi_order_infoType" Multiplicity="1" Role="FromRole_assoc_C36A7AFEDCA92A39590E50395A27B8FC"/>
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_C_VI_CLUSTER_DETAILType" Multiplicity="0..1" Role="ToRole_assoc_C36A7AFEDCA92A39590E50395A27B8FC"/>
+            </Association>
+            <Association Name="assoc_713B3329DBBD3D73969CA05DA96715F6" sap:content-version="1">
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.zywa_c_vi_order_infoType" Multiplicity="1" Role="FromRole_assoc_713B3329DBBD3D73969CA05DA96715F6"/>
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_C_VI_ORDER_ATTRType" Multiplicity="*" Role="ToRole_assoc_713B3329DBBD3D73969CA05DA96715F6"/>
+            </Association>
+            <Association Name="assoc_4410FEF64DB9F3A0AAFC66FFAFE85FD7" sap:content-version="1">
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.zywa_c_vi_order_infoType" Multiplicity="1" Role="FromRole_assoc_4410FEF64DB9F3A0AAFC66FFAFE85FD7"/>
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_C_VI_OD_TREEType" Multiplicity="*" Role="ToRole_assoc_4410FEF64DB9F3A0AAFC66FFAFE85FD7"/>
+            </Association>
+            <Association Name="assoc_B272588D699EA4819169301DF05741EB" sap:content-version="1">
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.zywa_c_vi_order_infoType" Multiplicity="1" Role="FromRole_assoc_B272588D699EA4819169301DF05741EB"/>
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_I_VI_TY01_ValueHelpType" Multiplicity="0..1" Role="ToRole_assoc_B272588D699EA4819169301DF05741EB"/>
+            </Association>
+            <Association Name="assoc_B1C157C7726F7A16E0C43F4D9E332792" sap:content-version="1">
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.zywa_c_vi_order_infoType" Multiplicity="1" Role="FromRole_assoc_B1C157C7726F7A16E0C43F4D9E332792"/>
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_C_VI_ORDER_SCRAP_COUNTType" Multiplicity="1" Role="ToRole_assoc_B1C157C7726F7A16E0C43F4D9E332792"/>
+            </Association>
+            <Association Name="assoc_224365F6E992943AA5D05EB20AE037A5" sap:content-version="1">
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_C_VI_OD_TREEType" Multiplicity="1" Role="FromRole_assoc_224365F6E992943AA5D05EB20AE037A5"/>
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.zywa_c_vi_order_infoType" Multiplicity="0..1" Role="ToRole_assoc_224365F6E992943AA5D05EB20AE037A5"/>
+            </Association>
+            <Association Name="assoc_3E806E8B011AF8E5791C26F7D505950D" sap:content-version="1">
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_C_VI_OD_TREEType" Multiplicity="1" Role="FromRole_assoc_3E806E8B011AF8E5791C26F7D505950D"/>
+                <End Type="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_I_VI_OD_DEFAULT_EXTType" Multiplicity="0..1" Role="ToRole_assoc_3E806E8B011AF8E5791C26F7D505950D"/>
+            </Association>
+            <EntityContainer Name="ZYWA_C_VI_ORDER_INFO_CDS_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZYWA_C_VI_CLUSTER_DETAIL" EntityType="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_C_VI_CLUSTER_DETAILType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZYWA_C_VI_ORDER_ATTR" EntityType="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_C_VI_ORDER_ATTRType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZYWA_I_VI_EI01_ValueHelp" EntityType="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_I_VI_EI01_ValueHelpType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZYWA_I_VI_TY01_ValueHelp" EntityType="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_I_VI_TY01_ValueHelpType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZYWA_C_VI_ORDER_SCRAP_COUNT" EntityType="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_C_VI_ORDER_SCRAP_COUNTType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZYWA_C_VI_OD_TREE" EntityType="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_C_VI_OD_TREEType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZYWA_I_VI_OD_DEFAULT_EXT" EntityType="ZYWA_C_VI_ORDER_INFO_CDS.ZYWA_I_VI_OD_DEFAULT_EXTType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="zywa_c_vi_order_info" EntityType="ZYWA_C_VI_ORDER_INFO_CDS.zywa_c_vi_order_infoType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <AssociationSet Name="assoc_B1C157C7726F7A16E0C43F4D9E332792" Association="ZYWA_C_VI_ORDER_INFO_CDS.assoc_B1C157C7726F7A16E0C43F4D9E332792" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zywa_c_vi_order_info" Role="FromRole_assoc_B1C157C7726F7A16E0C43F4D9E332792"/>
+                    <End EntitySet="ZYWA_C_VI_ORDER_SCRAP_COUNT" Role="ToRole_assoc_B1C157C7726F7A16E0C43F4D9E332792"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_9A134066FA1EF0CF8865F60C43BDDBC6" Association="ZYWA_C_VI_ORDER_INFO_CDS.assoc_9A134066FA1EF0CF8865F60C43BDDBC6" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zywa_c_vi_order_info" Role="FromRole_assoc_9A134066FA1EF0CF8865F60C43BDDBC6"/>
+                    <End EntitySet="ZYWA_C_VI_CLUSTER_DETAIL" Role="ToRole_assoc_9A134066FA1EF0CF8865F60C43BDDBC6"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_7EE34D7FD2CC288932E9C2999ED4D6C7" Association="ZYWA_C_VI_ORDER_INFO_CDS.assoc_7EE34D7FD2CC288932E9C2999ED4D6C7" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zywa_c_vi_order_info" Role="FromRole_assoc_7EE34D7FD2CC288932E9C2999ED4D6C7"/>
+                    <End EntitySet="ZYWA_I_VI_EI01_ValueHelp" Role="ToRole_assoc_7EE34D7FD2CC288932E9C2999ED4D6C7"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_713B3329DBBD3D73969CA05DA96715F6" Association="ZYWA_C_VI_ORDER_INFO_CDS.assoc_713B3329DBBD3D73969CA05DA96715F6" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zywa_c_vi_order_info" Role="FromRole_assoc_713B3329DBBD3D73969CA05DA96715F6"/>
+                    <End EntitySet="ZYWA_C_VI_ORDER_ATTR" Role="ToRole_assoc_713B3329DBBD3D73969CA05DA96715F6"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_B272588D699EA4819169301DF05741EB" Association="ZYWA_C_VI_ORDER_INFO_CDS.assoc_B272588D699EA4819169301DF05741EB" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zywa_c_vi_order_info" Role="FromRole_assoc_B272588D699EA4819169301DF05741EB"/>
+                    <End EntitySet="ZYWA_I_VI_TY01_ValueHelp" Role="ToRole_assoc_B272588D699EA4819169301DF05741EB"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_224365F6E992943AA5D05EB20AE037A5" Association="ZYWA_C_VI_ORDER_INFO_CDS.assoc_224365F6E992943AA5D05EB20AE037A5" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZYWA_C_VI_OD_TREE" Role="FromRole_assoc_224365F6E992943AA5D05EB20AE037A5"/>
+                    <End EntitySet="zywa_c_vi_order_info" Role="ToRole_assoc_224365F6E992943AA5D05EB20AE037A5"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_3E806E8B011AF8E5791C26F7D505950D" Association="ZYWA_C_VI_ORDER_INFO_CDS.assoc_3E806E8B011AF8E5791C26F7D505950D" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZYWA_C_VI_OD_TREE" Role="FromRole_assoc_3E806E8B011AF8E5791C26F7D505950D"/>
+                    <End EntitySet="ZYWA_I_VI_OD_DEFAULT_EXT" Role="ToRole_assoc_3E806E8B011AF8E5791C26F7D505950D"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_C36A7AFEDCA92A39590E50395A27B8FC" Association="ZYWA_C_VI_ORDER_INFO_CDS.assoc_C36A7AFEDCA92A39590E50395A27B8FC" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zywa_c_vi_order_info" Role="FromRole_assoc_C36A7AFEDCA92A39590E50395A27B8FC"/>
+                    <End EntitySet="ZYWA_C_VI_CLUSTER_DETAIL" Role="ToRole_assoc_C36A7AFEDCA92A39590E50395A27B8FC"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_4410FEF64DB9F3A0AAFC66FFAFE85FD7" Association="ZYWA_C_VI_ORDER_INFO_CDS.assoc_4410FEF64DB9F3A0AAFC66FFAFE85FD7" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="zywa_c_vi_order_info" Role="FromRole_assoc_4410FEF64DB9F3A0AAFC66FFAFE85FD7"/>
+                    <End EntitySet="ZYWA_C_VI_OD_TREE" Role="ToRole_assoc_4410FEF64DB9F3A0AAFC66FFAFE85FD7"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotations Target="ZYWA_C_VI_ORDER_INFO_CDS.zywa_c_vi_order_infoType/order_ext_type"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Eingabe Hilfe zu ext. Identtypen"/>
+                        <PropertyValue Property="CollectionPath" String="ZYWA_I_VI_EI01_ValueHelp"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="order_ext_type"/>
+                                    <PropertyValue Property="ValueListProperty" String="ext_id_type"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ext_id_type_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZYWA_C_VI_ORDER_INFO_CDS.zywa_c_vi_order_infoType/prod_type"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Eingabehilfe zum Produkttyp"/>
+                        <PropertyValue Property="CollectionPath" String="ZYWA_I_VI_TY01_ValueHelp"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="prod_type"/>
+                                    <PropertyValue Property="ValueListProperty" String="prod_type"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="prod_type_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="./sap/ZYWA_C_VI_ORDER_INFO_CDS/$metadata"
+                xmlns:atom="http://www.w3.org/2005/Atom"/>
+                <atom:link rel="latest-version" href="./sap/ZYWA_C_VI_ORDER_INFO_CDS/$metadata"
+                    xmlns:atom="http://www.w3.org/2005/Atom"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>
