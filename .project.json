@@ -1,0 +1,59 @@
+{
+  "projectType": [
+    "sap.watt.saptoolsets.fiori.project.ui5template.smartProject",
+    "sap.watt.uitools.ide.fiori",
+    "com.watt.common.builder.sapui5clientbuild",
+    "sap.watt.saptoolsets.fiori.project.uiadaptation"
+  ],
+  "build": {
+    "targetFolder": "dist",
+    "sourceFolder": "webapp",
+    "excludedFolders": [
+      "test"
+    ],
+    "buildRequired": true
+  },
+  "generation": [
+    {
+      "templateId": "ui5template.smartTemplateCommon",
+      "templateVersion": "1.40.12",
+      "dateTimeStamp": "Tue, 15 Aug 2017 11:32:05 GMT"
+    },
+    {
+      "templateId": "ui5template.smartTemplate",
+      "templateVersion": "1.40.12",
+      "dateTimeStamp": "Tue, 15 Aug 2017 11:32:07 GMT"
+    },
+    {
+      "templateId": "uiadaptation.changespreviewjs",
+      "templateVersion": "0.0.0",
+      "dateTimeStamp": "Fri, 22 Sep 2017 13:42:29 GMT"
+    }
+  ],
+  "mockpreview": {
+    "mockUri": "/sap/opu/odata/sap/ZYWA_C_VI_ORDER_INFO_CDS",
+    "metadataFilePath": "",
+    "loadJSONFiles": false,
+    "loadCustomRequests": false,
+    "mockRequestsFilePath": ""
+  },
+  "translation": {
+    "translationDomain": "",
+    "supportedLanguages": "en,de",
+    "defaultLanguage": "de",
+    "defaultI18NPropertyFile": "i18n.properties",
+    "resourceModelName": "i18n"
+  },
+  "basevalidator": {
+    "services": {
+      "xml": "fioriXmlAnalysis",
+      "js": "fioriJsValidator"
+    }
+  },
+  "codeCheckingTriggers": {
+    "notifyBeforePush": true,
+    "notifyBeforePushLevel": "Error",
+    "blockPush": false,
+    "blockPushLevel": "Error"
+  }
+}

@@ -1,0 +1,218 @@
+{
+	"_version": "1.5.0",
+	"sap.app": {
+		"id": "zywa.testzywa_order_info_app_local_300",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"tags": {
+			"keywords": []
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/sap/opu/odata/sap/ZYWA_C_VI_ORDER_INFO_CDS/",
+				"type": "OData",
+				"settings": {
+					"annotations": ["ZYWA_C_VI_ORDER_INFO_CDS_VAN", "localAnnotations_1", "localAnnotations"],
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"ZYWA_C_VI_ORDER_INFO_CDS_VAN": {
+				"uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZYWA_C_VI_ORDER_INFO_CDS_VAN',Version='0001')/$value/",
+				"type": "ODataAnnotation",
+				"settings": {
+					"localUri": "localService/ZYWA_C_VI_ORDER_INFO_CDS_VAN.xml"
+				}
+			},
+			"localAnnotations_1": {
+				"uri": "annotations/localAnnotations_1.xml",
+				"type": "ODataAnnotation",
+				"settings": {
+					"localUri": "annotations/localAnnotations_1.xml"
+				}
+			},
+			"localAnnotations": {
+				"uri": "annotations/annotations.xml",
+				"type": "ODataAnnotation",
+				"settings": {
+					"localUri": "annotations/annotations.xml"
+				}
+			}
+		},
+		"offline": false,
+		"sourceTemplate": {
+			"id": "ui5template.smartTemplate",
+			"version": "1.40.12"
+		},
+		"crossNavigation": {
+			"inbounds": {
+				"intent1": {
+					"signature": {
+						"parameters": {},
+						"additionalParameters": "allowed"
+					},
+					"semanticObject": "ZYwaVidOrderInfoSemObj",
+					"action": "display",
+					"indicatorDataSource": {
+						"dataSource": "mainService",
+						"path": "zywa_c_vi_order_info"
+					}
+				}
+			},
+			"outbounds": {
+				"VidOrderInfo": {
+					"semanticObject": "ZYwaVidOrderInfoSemObj",
+					"action": "display"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": ["sap_hcb", "sap_belize"]
+	},
+	"sap.ui5": {
+		"resources": {
+			"js": [],
+			"css": []
+		},
+		"dependencies": {
+			"minUI5Version": "1.32.1",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.comp": {},
+				"sap.uxap": {},
+				"sap.suite.ui.generic.template": {},
+				"sap.ui.layout": {},
+				"sap.f": {},
+				"sap.ushell": {},
+				"sap.collaboration": {}
+			},
+			"components": {}
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			},
+			"@i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			},
+			"i18n|sap.suite.ui.generic.template.ListReport|zywa_c_vi_order_info": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/ListReport/zywa_c_vi_order_info/i18n.properties"
+			},
+			"i18n|sap.suite.ui.generic.template.ObjectPage|zywa_c_vi_order_info": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/ObjectPage/zywa_c_vi_order_info/i18n.properties"
+			},
+			"i18n|sap.suite.ui.generic.template.ObjectPage|ZYWA_C_VI_OD_TREE": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/ObjectPage/ZYWA_C_VI_OD_TREE/i18n.properties"
+			},
+			"": {
+				"dataSource": "mainService",
+				"settings": {
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "Inline",
+					"refreshAfterChange": false
+				}
+			}
+		},
+		"extends": {
+			"extensions": {}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		}
+	},
+	"sap.ui.generic.app": {
+		"pages": [{
+			"entitySet": "zywa_c_vi_order_info",
+			"component": {
+				"name": "sap.suite.ui.generic.template.ListReport",
+				"list": true,
+				"settings": {
+					"gridTable": true,
+					"smartVariantManagement": true
+				}
+			},
+			"pages": [{
+				"entitySet": "zywa_c_vi_order_info",
+				"component": {
+					"name": "sap.suite.ui.generic.template.ObjectPage",
+					"settings": {
+							"gridTable": true
+						}
+				},
+				"pages": [{
+					"navigationProperty": "to_order_tree",
+					"entitySet": "ZYWA_C_VI_OD_TREE",
+					"component": {
+						"name": "sap.suite.ui.generic.template.ObjectPage"
+					},
+					"pages": [{
+						"navigationProperty": "to_od_info",
+						"entitySet": "zywa_c_vi_order_info",
+						"component": {
+							"name": "sap.suite.ui.generic.template.ObjectPage"
+						}
+					}]
+				}, {
+					"navigationProperty": "to_od_cluster_element",
+					"entitySet": "ZYWA_C_CLUST_INFO_FOR_PART",
+					"component": {
+						"name": "sap.suite.ui.generic.template.ObjectPage"
+					},
+					"pages": [{
+						"navigationProperty": "to_od_info",
+						"entitySet": "xabatxv_c_dt_od01",
+						"component": {
+							"name": "sap.suite.ui.generic.template.ObjectPage"
+						}
+					}, {
+						"entitySet": "zywa_c_vi_order_info",
+						"component": {
+							"name": "sap.suite.ui.generic.template.ObjectPage"
+						},
+						"navigation": {
+							"display": {
+								"path": "sap.apps.crossNavigation.outbounds",
+								"target": "VidOrderInfo"
+							}
+						}
+					}]
+				}, {
+					"navigationProperty": "to_od_cluster",
+					"entitySet": "ZYWA_C_VI_CLUSTER_DETAIL",
+					"component": {
+						"name": "sap.suite.ui.generic.template.ObjectPage"
+					}
+				}]
+			}]
+		}]
+	},
+	"sap.platform.hcp": {
+		"uri": ""
+	}
+}
